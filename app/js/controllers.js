@@ -1,31 +1,13 @@
 'use strict';
 
 /* Controllers */
-var reedsyBooksControllers = angular.module('bookControllers', []);
-
-//service to pass book data between controllers and views
-reedsyBooksControllers.service('bookSelect', function(){
-  //the book for the detail page
-  this.currentBookObj;
-    //returns value
-    this.getProperty = function () {
-      return this.currentBookObj;
-    };
-    //sets value;
-    this.setProperty = function(currValue) {
-      this.currentBookObj = currValue;
-    };
-});
+var reedsyBooksControllers = angular.module('bookControllers', ['ngResource']);
 
 
-reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelect', '$rootScope',
-  function($scope, $http, bookSelect) {
+reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelect', 'Book', '$rootScope',
+  function($scope, $http, bookSelect, Book) {
 
-    //gets data for books
-    $http.get('books/books.json').success(function(data) {
-      //create a books variable for returned object to be used in the view 
-      return $scope.books = data;
-    });
+    $scope.books = Book.query();
 
     //sets the filterBy to all as default and on 'all' selection
     $scope.orderProp = '';
@@ -44,7 +26,11 @@ reedsyBooksControllers.controller('BookDetailCtrl', ['$scope', 'bookSelect', '$r
     //set book variable to the current book 
     $scope.book = $routeParams.currentBookObj;
 
-    
+    // $http.get('books/books.json').success(function(data) {
+    //   console.log(data);
+    //   //create a books variable for returned object to be used in the view 
+    //   return $scope.books = data;
+    // });    
     
     //creates contents obj to be used in bookdetail for ngrepeat on contents
     $scope.contents = {};
