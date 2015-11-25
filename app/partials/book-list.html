@@ -3,30 +3,45 @@
     <div class="col-md-2">
       <!--Sidebar content-->
 
+<!--=== user input search & select ===--> 
       Search: <input ng-model="query">
-      Sort by:
+      Show me:
       <select ng-model="orderProp">
         <option value="">All</option>
         <option value="Non-Fiction">Non-Fiction</option>
         <option value="Fiction">Fiction</option>
       </select>
+     <!--  Books about: 
+      <select ng-model="orderProp">
+        <option value="">All</option>
+        <option value="Adventure">Adventure</option>
+        <option value="History">History</option>
+        <option value="Arts">Arts</option>
+        <option value="Sciences">Sciences</option>
+        <option value="Children's Books">Children's Books</option>
+        <option value="Arts">Arts</option>
+        <option value="Arts">Arts</option>
+        <option value="Christian Books">Christian Books</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Technology">Technology</option>
+      </select> -->
 
     </div>
     <div class="col-md-10">
       <!--Body content-->
 
-
       <table>
-        
+        <!--=== ngRepeat dynamically adds all books in books.json to booklist view ===-->
         <td ng-repeat="book in books | filter:(orderProp || undefined):true | orderBy:orderProp" class="thumbnail">
-      <div class="books">
-          <a href="#/books/{{book.id}}" class="thumb" ng-click="currentObj(book)"><img ng-src="{{book.author.avatar}}"></a>
-          <p><a href="#/books/{{book.id}}" ng-click="currentObj(book)">{{book.name}}</a></p>
-          <p>{{'by ' + book.name}}</p>
-          <p class="left">{{book.likes}}</p><p class="right">{{book.published}}</p>
-          <p>{{book.genre.category}}</p>
-      </div>
-          </td>
+          <div class="books">
+          <!--=== links both the pic and the title to a new page for a detailed view ===-->
+            <a href="#/books/{{book.id}}" class="thumb" ng-click="currentObj(book)"><img ng-src="{{book.author.avatar}}"></a>
+            <p><a href="#/books/{{book.id}}" ng-click="currentObj(book)">{{book.name}}</a></p>
+            <p>{{'by ' + book.name}}</p>
+            <p class="left">{{book.likes}}</p><p class="right">{{book.published}}</p>
+            <p>{{book.genre.category}}</p>
+          </div>
+        </td>
       </table>
 
     </div>

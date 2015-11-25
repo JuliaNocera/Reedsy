@@ -1,37 +1,40 @@
 'use strict';
 
 /* Controllers */
-// var array = [];
 var reedsyBooksControllers = angular.module('bookControllers', []);
 
-// reedsyBooksControllers.value("bookSelect", {
-//     currentBook: ''
-//   });
+//service to pass book data between controllers and views
 reedsyBooksControllers.service('bookSelect', function(){
-  this.currentBook = {};
+  //the book for the detail page
+  this.currentBookObj;
+    //returns value
     this.getProperty = function () {
-      return currentBookObj;
+      return this.currentBookObj;
     };
+    //sets value;
     this.setProperty = function(currValue) {
-      currentBookObj = value;
+      this.currentBookObj = currValue;
     };
-    // return this.currentBook; 
 });
 
 
-reedsyBooksControllers.controller('BookListCtrl', ['$scope','$http', '$rootScope',
+reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelect', '$rootScope',
   function($scope, $http, bookSelect) {
-    return $http.get('books/books.json').success(function(data) {
+
+    //gets data for books
+    $http.get('books/books.json').success(function(data) {
+
+      //create a books variable for returned object to be used in the view 
       return $scope.books = data;
     });
+
+    //sets the filterBy to all as default and on 'all' selection
     $scope.orderProp = '';
 
-    console.log($scope.bookie);
-
+    //currentObj is called in book-list.html when a user clicks to link to the detail page
     $scope.currentObj = function(book){
-      $scope.bookie = book;
-      console.log($scope.bookie);
-      bookSelect.setProperty();
+      //sets the currentBookObj to the object clicked 
+      bookSelect.setProperty(book);
     }
 
   }]);
@@ -39,14 +42,7 @@ reedsyBooksControllers.controller('BookListCtrl', ['$scope','$http', '$rootScope
 
 reedsyBooksControllers.controller('BookDetailCtrl', ['$scope', 'bookSelect', '$routeParams', '$http',
   function($scope, $routeParams, $http, bookSelect) {
-    // $http.get('books/books.json').success(function(data) {
-    //   $scope.book = data;
-    // });
-    $scope.book = $routeParams;
-$scope.currentObj = function(book){
-      $scope.bookie = book;
-      console.log($scope.bookie);
-      bookSelect.setProperty();
-    }
-
+    
+    //set book variable to the current book 
+    $scope.book = $routeParams.currentBookObj;
   }]);
