@@ -1,4 +1,19 @@
 <!-- TBD: detail view for <span>{{book}}</span> -->
-<p>{{book.<author class="name"></author>}}</p>
+<h1 class="details">{{book.name}} <img class="bookCover" ng-src="{{book.cover}}"></h1>
+<h4 class="details second"align="">{{'By ' + book.author.name}}</h4>
+<h5 class="details description">{{book.description}}</h5>
+<p class="details">
+Categories:
+	<span>{{book.genre.category}}</span>, <span>{{book.genre.name}}</span>
+</p>
+<div class="contents">
+<h3 class="details">Introduction</h3>
+<ul class="contents">
+	<li class="contents" ng-repeat="content in contents">
+	<p>{{content}}</p>
+	</li>
+</ul>
+<p><img class="author" ng-src="{{book.author.avatar}}"></p>
 
-<p class="thumb"><img ng-src="{{book.author.avatar}}"></a>
+
+</div>

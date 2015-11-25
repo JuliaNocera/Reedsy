@@ -23,7 +23,6 @@ reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelec
 
     //gets data for books
     $http.get('books/books.json').success(function(data) {
-
       //create a books variable for returned object to be used in the view 
       return $scope.books = data;
     });
@@ -42,7 +41,24 @@ reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelec
 
 reedsyBooksControllers.controller('BookDetailCtrl', ['$scope', 'bookSelect', '$routeParams', '$http',
   function($scope, $routeParams, $http, bookSelect) {
-    
     //set book variable to the current book 
     $scope.book = $routeParams.currentBookObj;
+
+    
+    
+    //creates contents obj to be used in bookdetail for ngrepeat on contents
+    $scope.contents = {};
+    for (var key in $scope.book.introduction) {
+      $scope.contents[key] = $scope.book.introduction[key].content;
+    };    
+
   }]);
+
+
+
+
+
+
+
+
+
