@@ -3,7 +3,7 @@
 body {
   padding-top: 20px;
   background-color: #e8dec3;
-  background-image: url('/app/img/books.jpg');
+  background-image: url('../img/books.jpg');
   background-size: 100%;
 }
 
