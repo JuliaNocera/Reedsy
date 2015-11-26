@@ -1,4 +1,5 @@
 <div class="contents">
+
 	<header id="header">
 		<div class="navbar navbar-fixed-top">
 		   <a href="#/books" class="pull-right home">HOME</a>
@@ -10,25 +11,26 @@
 	<h5 class="details description">{{book.description}}</h5>
 	<p class="details">Categories:	<span>{{book.genre.category}}</span>, <span>{{book.genre.name}}</span></p>
 	
-		<h3 class="details">Introduction</h3>
+	<h3 class="details">Introduction</h3>
 		<ul class="contents">
 			<li class="contents" ng-repeat="content in contents">
 				<p>{{content}}</p>
 			</li>
 		</ul>
 
-		<select ng-hide="true" ng-model="cat">
-			<option value="{{book.genre.name}}"></option>
-			<select ng-model="gen">
-				<option value="{{book.genre.category}}"></option>
-			</select>
+	<select ng-hide="true" ng-model="cat">
+		<option value="{{book.genre.name}}"></option>
+		<select ng-model="gen">
+			<option value="{{book.genre.category}}"></option>
 		</select>
+	</select>
 
 
-		<div><img class="author" ng-src="{{book.author.avatar}}"></div>
-			<ul class="details newBooks" ng-controller="BookListCtrl">
-				<h3 class="suggestions">Recommended:</h3>
-				<li class="suggestions" ng-repeat="book in books | filter:(gen || undefined):true | filter:(cat || undefined):true | limitTo:limit">{{book.name + ' by ' + book.author.name + ' '}}
-				</li>
-			</ul>
-	</div>
+	<div><img class="author" ng-src="{{book.author.avatar}}"></div>
+		<ul class="details newBooks" ng-controller="BookListCtrl">
+			<h3 class="suggestions">Recommended:</h3>
+			<li class="suggestions" ng-repeat="book in books | filter:(gen || undefined):true | filter:(cat || undefined):true | limitTo:limit">{{book.name + ' by ' + book.author.name + ' '}}
+			</li>
+		</ul>
+
+</div>
