@@ -1,34 +1,75 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      <!--Sidebar content-->
-
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderProp">
-        <option value="">All</option>
-        <option value="Non-Fiction">Non-Fiction</option>
-        <option value="Fiction">Fiction</option>
-      </select>
-
-    </div>
-    <div class="col-md-10">
-      <!--Body content-->
-
-
-      <table>
-        
-        <td ng-repeat="book in books | filter:(orderProp || undefined):true | orderBy:orderProp" class="thumbnail">
-      <div class="books">
-          <a href="#/books/{{book.id}}" class="thumb" ng-click="currentObj(book)"><img ng-src="{{book.author.avatar}}"></a>
-          <p><a href="#/books/{{book.id}}" ng-click="currentObj(book)">{{book.name}}</a></p>
-          <p>{{'by ' + book.name}}</p>
-          <p class="left">{{book.likes}}</p><p class="right">{{book.published}}</p>
-          <p>{{book.genre.category}}</p>
-      </div>
-          </td>
-      </table>
-
-    </div>
+<div id="top" class="container-fluid">
+  <div class="navbar navbar-fixed-top">
+    <a href="#/#/top" class="page-scroll pull-right home">Top</a>
   </div>
+
+  <h1 class="homeTitle">Library</h1>
+
+<!--=== user input search & select ===-->
+  <div id="top" class="filters">
+    Search <input ng-model="query">
+    Show me:
+    <select ng-model="orderProp">
+      <option value="">All</option>
+      <option value="Non-Fiction">Non-Fiction</option>
+      <option value="Fiction">Fiction</option>
+    </select>
+    Books about: 
+    <select ng-model="orderG">
+      <option value="">All</option>
+      <option value="Biographies">Biographies</option>
+      <option value="Business">Business</option>
+      <option value="Calendars">Calendars</option>
+      <option value="Children's Books">Children's Books</option>
+      <option value="Christian Books">Christian Books</option>
+      <option value="Comics">Comics</option>
+      <option value="Computers">Computers</option>
+      <option value="Cookbooks">Cookbooks</option>
+      <option value="Education">Education</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Fantasy">Fantasy</option>
+      <option value="Health">Health</option>
+      <option value="History">History</option>
+      <option value="Humor">Humor</option>
+      <option value="Law">Law</option>
+      <option value="Literature">Literature</option>
+      <option value="Medical Books">Medical Books</option>
+      <option value="Parenting">Parenting</option>
+      <option value="Politics">Politics</option>
+      <option value="Relationships">Relationships</option>
+      <option value="Religion">Religion</option>
+      <option value="Romance">Romance</option>
+      <option value="Science Fiction">Science Fiction</option>
+      <option value="Sciences">Sciences</option>
+      <option value="Self-Help">Self-Help</option>
+      <option value="Social Sciences">Social Sciences</option>
+      <option value="Spirituality">Spirituality</option>
+      <option value="Technology">Technology</option>
+      <option value="Sports">Sports</option>
+      <option value="Teen">Teen</option>
+      <option value="Thriller">Thriller</option>
+      <option value="Arts">Arts</option>
+      <option value="Travel">Travel</option>
+    </select>
+  </div>
+</div>
+
+<!--Body content-->
+
+<div class="row">
+  <div ng-repeat="book in books | filter:query | filter:(orderProp || undefined):true | filter:(orderG || undefined):true | orderBy:orderProp">
+    <div class="col-xs-8 col-sm-5 col-md-4 bookList">
+
+      <div><a href="#/books/{{book.id}}" ng-click="currentObj(book)"><img class="coverImg" ng-src="{{book.cover}}"></a>
+      </div> 
+
+      <div class="bookname"><a href="#/books/{{book.id}}" ng-click="currentObj(book)">{{book.name}}</a>
+        <p>{{'by ' + book.author.name}}</p>
+        <p><em>{{book.genre.category}}{{', ' + book.genre.name}}</em></p>
+        <span class="right">{{book.published | date}}</span>
+        <p><span class="glyphicon glyphicon-heart"></span>{{' ' + book.likes + ' '}}</p>
+      </div>
+
+    </div>
+  </div> 
 </div>

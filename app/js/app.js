@@ -4,7 +4,8 @@
 
 var bookApp = angular.module('bookApp', [
   'ngRoute',
-  'bookControllers'
+  'bookControllers', 
+  'bookServices'
 ]);
 
 bookApp.config(['$routeProvider',
