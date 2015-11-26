@@ -1,12 +1,13 @@
 'use strict';
 
-var reedsyBookServices = angular.module('reedsyBookServices', ['ngResource']);
+var bookServices = angular.module('bookServices', ['ngResource']);
 
 
 //service to pass book data between controllers and views
-reedsyBookServices.service('bookSelect', function(){
+bookServices.service('bookSelect', function(){
   //the book for the detail page
   this.currentBookObj;
+  this.allBooks;
     //returns value
     this.getProperty = function () {
       return this.currentBookObj;
@@ -14,13 +15,12 @@ reedsyBookServices.service('bookSelect', function(){
     //sets value;
     this.setProperty = function(currValue) {
       this.currentBookObj = currValue;
+      this.currentCat = currValue.genre.category;
     };
-
 });
 
-reedsyBookServices.factory('Book', ['$resource',
-  function($resource){
+bookServices.factory('Book', ['$resource', function($resource){
     return $resource('books/books.json', {}, {
       query: {method:'GET', isArray:true}
-    });
+    })
   }]);

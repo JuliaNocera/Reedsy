@@ -4,9 +4,10 @@
 var reedsyBooksControllers = angular.module('bookControllers', ['ngResource']);
 
 
-reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelect', 'Book', '$rootScope',
-  function($scope, $http, bookSelect, Book) {
+reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelect', 'Book', '$routeParams', '$rootScope',
+  function($scope, $http, bookSelect, Book, $routeParams, $rootScope) {
 
+    //calls query to make http request to JSON file
     $scope.books = Book.query();
 
     //sets the filterBy to all as default and on 'all' selection
@@ -18,20 +19,18 @@ reedsyBooksControllers.controller('BookListCtrl', ['$scope', '$http', 'bookSelec
       bookSelect.setProperty(book);
     }
 
+    //sets suggested books limit to 3 
+    $scope.limit = 3;
+
   }]);
 
 
-reedsyBooksControllers.controller('BookDetailCtrl', ['$scope', 'bookSelect', '$routeParams', '$http',
-  function($scope, $routeParams, $http, bookSelect) {
-    //set book variable to the current book 
-    $scope.book = $routeParams.currentBookObj;
+reedsyBooksControllers.controller('BookDetailCtrl', ['$scope', 'bookSelect', '$location', '$routeParams', '$http',
+  function($scope, $routeParams, $http, bookSelect, Book, $location) {
 
-    // $http.get('books/books.json').success(function(data) {
-    //   console.log(data);
-    //   //create a books variable for returned object to be used in the view 
-    //   return $scope.books = data;
-    // });    
-    
+    //sets book variable to the current book 
+    $scope.book = $routeParams.currentBookObj;      
+        
     //creates contents obj to be used in bookdetail for ngrepeat on contents
     $scope.contents = {};
     for (var key in $scope.book.introduction) {
@@ -40,9 +39,10 @@ reedsyBooksControllers.controller('BookDetailCtrl', ['$scope', 'bookSelect', '$r
 
   }]);
 
-
-
-
+//redirects to landing page on refresh from detail view
+reedsyBooksControllers.controller('topController', ['$location', function($location){
+  $location.path("/")
+}]);
 
 
 
