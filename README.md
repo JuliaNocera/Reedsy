@@ -1,5 +1,7 @@
 # Reedsy
-A SPA app using AngularJS that lists books with sort and search functionality as well as a quick view of any chosen book.
+A SPA app using AngularJS and NodeJS. Reedsy lists books with sort and search functionality as well as a quick view of any chosen book. 
+
+Live Demo: https://reedsy.herokuapp.com
 
 # To Run 
 Download on your machine by cloning in terminal with command :
