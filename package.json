@@ -4,6 +4,10 @@
   "description": "A small Node server application that displays a main book navigation page and detail pages for each book",
   "repository": "https://github.com/JuliaNocera/Reedsy",
   "license": "MIT",
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "node app.js"
+  },
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.3"
